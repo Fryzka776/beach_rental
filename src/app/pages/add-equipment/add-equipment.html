@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card p-4">
+            <h5 class="mb-3">Dodaj nowy sprzęt</h5>
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label">Typ</label>
+                    <select class="form-select" [(ngModel)]="type">
+                        <option *ngFor="let t of types" [ngValue]="t">{{t}}</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label">Nazwa</label>
+                    <input class="form-control" [(ngModel)]="name" placeholder="np. Leżak duży"/>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Dostępna ilość</label>
+                    <input type="number" class="form-control" [(ngModel)]="available" min="0"/>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Cena / dzień (zł)</label>
+                    <input type="number" class="form-control" [(ngModel)]="pricePerDay" min="0"/>
+                </div>
+            </div>
+            <button class="btn btn-brand mt-3" (click)="submit()">
+                <i class="fa-solid fa-plus me-2"></i>Dodaj
+            </button>
+        </div>
+    </div>
+</div>

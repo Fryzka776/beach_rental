@@ -1,0 +1,47 @@
+<div class="row g-4">
+    <div class="col-12 col-lg-4">
+        <div class="card p-3">
+            <div class="d-flex align-items-center mb-2">
+                <i class="fa-solid fa-cloud-sun fa-2x text-warning me-2"></i>
+                <h5 class="mb-0">Pogoda — Gdańsk</h5>
+            </div>
+            <ng-container *ngIf="weather$ | async as w; else loading">
+                <div class="fs-1 fw-bold">{{w.temp | number:'1.0-0'}}°C</div>
+                <div class="small text-muted">Ciśnienie: {{w.pressure | number:'1.0-0'}} hPa</div>
+                <div class="small text-muted">Zachmurzenie: {{w.cloud}}%</div>
+                <div class="small text-muted">Wiatr: {{w.windSpeed}} m/s ({{windDir(w.windDirDeg)}})</div>
+                <div class="small text-muted">Aktualizacja: {{w.time | date:'short'}}</div>
+            </ng-container>
+            <ng-template #loading>
+                <div class="placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                    <span class="placeholder col-8"></span>
+                    <span class="placeholder col-6"></span>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="col-12 col-lg-8">
+        <div class="d-flex align-items-center mb-3">
+            <h5 class="mb-0 me-2">Dostępny sprzęt</h5>
+            <span class="badge rounded-pill badge-soft">na stanie</span>
+        </div>
+        <div class="row g-3">
+            <div class="col-12 col-md-6" *ngFor="let e of (equipment$ | async)">
+                <div class="card h-100">
+                    <img [src]="e.img" class="card-img-top" alt="{{e.type}}" style="height:200px;object-fit:cover;">
+                    <div class="card-body">
+                        <h6 class="card-title">{{e.name}}</h6>
+                        <div class="text-muted small mb-2">Typ: {{e.type}}</div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-semibold">
+                                <i class="fa-solid fa-coins me-1"></i>{{e.pricePerDay}} zł/dzień
+                            </span>
+                            <span class="badge bg-light text-dark">Dostępne: {{e.available}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

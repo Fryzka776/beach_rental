@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5>Wybierz sprzęt do wypożyczenia</h5>
+  <a class="btn btn-outline-secondary" routerLink="/rent_confirm">
+    <i class="fa-solid fa-cart-shopping me-1"></i>Podsumowanie
+  </a>
+</div>
+
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-lg-4" *ngFor="let e of (equipment$ | async)">
+    <div class="card h-100">
+      <img [src]="e.img" class="card-img-top" style="height:180px; object-fit:cover;"/>
+      <div class="card-body d-flex flex-column">
+        <h6>{{e.name}}</h6>
+        <div class="text-muted small mb-2">
+          {{e.type}} - {{e.pricePerDay}} zł/dzień
+        </div>
+
+        <div class="mb-2">
+          <small>Dostępne: {{ e.available - getCartQty(e.id) }} / {{ e.stock }}</small>
+          <div class="progress" style="height:6px;">
+            <div class="progress-bar bg-info"
+                 role="progressbar"
+                 [style.width.%]="((e.available - getCartQty(e.id)) / e.stock) * 100">
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-2" *ngIf="getCartQty(e.id) > 0">
+          <small>W koszyku: {{ getCartQty(e.id) }}</small>
+        </div>
+
+        <div class="mt-auto d-flex gap-2 align-items-center">
+          <input type="number"
+                 class="form-control"
+                 style="max-width:110px"
+                 min="1"
+                 [max]="e.available - getCartQty(e.id)"
+                 [(ngModel)]="qty[e.id]">
+
+          <button class="btn btn-brand"
+                  [disabled]="(e.available - getCartQty(e.id)) === 0"
+                  (click)="add(e)">
+            Dodaj
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

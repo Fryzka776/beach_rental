@@ -1,0 +1,26 @@
+<div class="card p-3">
+  <h5>Zwrot sprzętu</h5>
+
+  <ng-container *ngIf="(rental$ | async) as r; else empty">
+    <div *ngIf="r; else empty">
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let i of r.items">
+          <span>{{ i.name }} × {{ i.qty }}</span>
+          <div class="d-flex gap-2">
+            <span class="text-muted">{{ i.pricePerDay }} zł/dzień</span>
+            <button class="btn btn-sm btn-outline-danger" (click)="returnAll(i.equipmentId)">Zwróć wszystkie</button>
+          </div>
+        </li>
+      </ul>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-secondary" (click)="cancel()">Anuluj</button>
+        <button class="btn btn-brand" (click)="confirm()">Potwierdź zwrot całości</button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #empty>
+    <div class="text-muted">Brak aktywnego wypożyczenia.</div>
+  </ng-template>
+</div>
