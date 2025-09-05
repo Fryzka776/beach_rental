@@ -1,59 +1,36 @@
-# BeachRental
+# Beach Rental
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.4.
+A web application for managing beach equipment rentals.  
+Allows users to browse available equipment, add items to a cart, review rentals, and return equipment. The system supports user roles, updates equipment availability in real time, and displays current weather for a chosen location.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Browse available equipment by type.  
+- Add equipment to cart with quantity validation (cannot exceed available stock).  
+- Rental summary with editable quantities before final confirmation.  
+- Updates stock availability after confirming rental.  
+- Return equipment (all or by category).  
+- Display current weather for a selected location.  
+- User role support (e.g., admin can add new equipment).  
+- Responsive interface using Bootstrap 5 and FontAwesome.  
 
-```bash
-ng serve
-```
+## Technologies
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Angular 16** – front-end framework  
+- **RxJS** – reactive data streams (BehaviorSubject, Observable)  
+- **Bootstrap 5** – responsive layout and styling  
+- **FontAwesome** – icons  
+- **LocalStorage** – persistent storage for equipment and rentals  
+- **TypeScript** – typed JavaScript
 
-## Code scaffolding
+## Weather Configuration
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Current weather is fetched from a free API (e.g., Open-Meteo, WeatherAPI). To change the location, modify the parameters in WeatherService.
 
-```bash
-ng generate component component-name
-```
+## Usage
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Add equipment to cart: On the “Rent” page, select quantity and click “Add”.
+- Summary: Click “Summary” in the top-right corner to edit quantities or remove items.
+- Confirm rental: Updates stock availability and saves the order.
+- Return equipment: “Return” page allows returning the entire rental or individual categories.
+- Admin: Can add new equipment via the admin interface.
